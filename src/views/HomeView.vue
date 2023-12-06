@@ -1,9 +1,14 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { useBlogStore } from '../stores/articles'
+const blog = useBlogStore()
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <ul>
+      <li :key="post.id" v-for="post in blog.posts.data">
+        {{ post.title }}
+      </li>
+    </ul>
   </main>
 </template>

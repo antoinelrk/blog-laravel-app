@@ -1,23 +1,30 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { useBlogStore } from './stores/articles'
+import { onMounted } from 'vue'
+
+const blog = useBlogStore()
+onMounted(() => blog.fetchArticles())
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <div class="app-title">Mon blog</div>
+    <nav>
+      <ul>
+        <li>
+          <RouterLink to="/">Home</RouterLink>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <RouterView />
+  
+  <footer>
+    Make with love by Antoine LRK
+  </footer>
 </template>
 
 <style scoped>

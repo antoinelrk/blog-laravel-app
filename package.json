@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
+    "axios": "^1.6.2",
+    "normalize-scss": "^8.0.0",
     "pinia": "^2.1.7",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.6",
