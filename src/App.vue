@@ -1,30 +1,21 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { useBlogStore } from './stores/articles'
-import { onMounted } from 'vue'
+import { RouterView } from 'vue-router'
+// import { useBlogStore } from './stores/articles'
+// import { onMounted } from 'vue'
 
-const blog = useBlogStore()
-onMounted(() => blog.fetchArticles())
+import Header from './components/UI/HeaderComponent.vue'
+import Footer from './components/UI/FooterComponent.vue'
+
+// const blog = useBlogStore()
+// onMounted(() => blog.fetchArticles())
 
 </script>
 
 <template>
-  <header>
-    <div class="app-title">Mon blog</div>
-    <nav>
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
+  <Header />
   <RouterView />
   
-  <footer>
-    Make with love by Antoine LRK
-  </footer>
+  <Footer />
 </template>
 
 <style scoped>

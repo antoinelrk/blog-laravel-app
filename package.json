@@ -11,8 +11,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
+    "heroicons": "^2.0.18",
     "normalize-scss": "^8.0.0",
     "pinia": "^2.1.7",
     "postcss": "^8.4.32",
