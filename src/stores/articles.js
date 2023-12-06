@@ -1,5 +1,5 @@
 import { defineStore, acceptHMRUpdate } from "pinia"
-import axios from 'axios'
+import { all, destroy, create, update } from '../api/articles.js'
 
 export const useBlogStore = defineStore('blog', {
     state: () => ({
@@ -13,13 +13,26 @@ export const useBlogStore = defineStore('blog', {
         }
     },
     actions: {
-        async fetchArticles(page = null) {
-            try {
-                const response = await axios.get(`http://localhost:8000/api/articles${page != null ? "?page=" + page : ""}`)
-                this.posts = response.data
-            } catch (e) {
-                this.error = e
+        async create(payload) {
+            const {data, success} = await create(payload)
+            console.log(data, success)
+        },
+        async update(payload) {
+            const {data, success} = await update(payload)
+            console.log(data, success)
+        },
+        async destroy (slug) {
+            const {success} = await destroy(slug)
+            if (success.state) { this.posts.data = this.posts.data.filter(post => post.slug !== slug) }
+            
+            return {
+                success
             }
+        },
+        async fetchArticles(page = null) {
+            let {data, err} = await all(page)
+            this.posts = data
+            this.error = err
         }
     }
 })

@@ -1,10 +1,17 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../stores/articles'
 const blog = useBlogStore()
 const route = useRoute()
+const router = useRouter()
 const slug = route.params.slug
 const currentArticle = blog.current(slug)
+
+const handleDelete = async () => {
+	const { success } = await blog.destroy(slug)
+	if (success.state) router.push({name: "home"})
+	// TODO: Message d'erreur en popup
+}
 </script>
 
 <template>
@@ -30,17 +37,11 @@ const currentArticle = blog.current(slug)
 				<div class="text-black">
 					<p v-html="currentArticle.content_raw"></p>
 				</div>
+				<div class="flex space-between gap-x-5">
+					<RouterLink class="px-5 py-2 font-semibold border rounded dark:bg-blue-300 dark:border-blue-400 dark:text-white" :to="`/articles/${slug}/edit`">Editer</RouterLink>
+					<button @click="handleDelete" class="px-5 py-2 font-semibold border rounded dark:bg-red-500 dark:border-red-400 dark:text-white">Supprimer</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
-
-<!-- <template>
-    <main>
-        <RouterLink :to="`/articles/${slug}/edit`">Editer</RouterLink>
-        <h1 style="font-size: 2em;">#{{ currentArticle.id }} - {{ currentArticle.title }}</h1>
-        <p>{{ currentArticle.content_raw }}</p>
-        <img :src="currentArticle.image" alt="">
-        <span style="color: orange">{{ currentArticle.user }}</span>
-    </main>
-</template> -->
