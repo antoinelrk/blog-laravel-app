@@ -54,6 +54,9 @@ const mobileMenuOpen = ref(false)
                 <RouterLink @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/about">
                   About
                 </RouterLink>
+                <RouterLink @click="mobileMenuOpen = false" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/articles/create">
+                  Create new article
+                </RouterLink>
               </div>
             </div>
           </div>

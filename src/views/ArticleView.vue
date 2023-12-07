@@ -1,17 +1,21 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../stores/articles'
+import { onBeforeMount } from 'vue'
 
 const blog = useBlogStore()
 const route = useRoute()
 const router = useRouter()
 const slug = route.params.slug
-const currentArticle = blog.current(slug)
+let currentArticle
+
+onBeforeMount(() => {
+	currentArticle = blog.current(slug)
+})
 
 const handleDelete = async () => {
 	const { success } = await blog.destroy(slug)
 	if (success.state) router.push({name: "home"})
-	// TODO: Message d'erreur en popup
 }
 </script>
 
