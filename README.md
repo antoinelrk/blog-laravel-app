@@ -8,7 +8,7 @@ Voici le setup de la partie frontend de l'application, à faire **après** le se
 
 ```sh
 git clone https://github.com/antoinelrk/blog-laravel-app.git
-cd ./blog-laravel-api
+cd ./blog-laravel-app
 
 cp .env.example .env
 
