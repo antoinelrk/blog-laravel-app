@@ -27,6 +27,9 @@ const mobileMenuOpen = ref(false)
           <RouterLink to="/about" class="text-sm font-semibold leading-6 text-gray-900">
             About
           </RouterLink>
+          <RouterLink to="/articles/create" class="text-sm font-semibold leading-6 text-gray-900">
+            Create new article 
+          </RouterLink>
         </PopoverGroup>
       </nav>
       <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
