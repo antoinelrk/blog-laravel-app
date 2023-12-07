@@ -1,41 +1,20 @@
-# blog-laravel-app
+# Blog Laravel-Vue: App
 
-This template should help get you started developing with Vue 3 in Vite.
+> IMPORTANT: Si vous n'avez pas encore setup l'API, veuillez vous rediriger vers ce [dépôt] et suivre les instructions avant de continuer
 
-## Recommended IDE Setup
+## Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+Voici le setup de la partie frontend de l'application, à faire **après** le setup de l'API
 
 ```sh
-npm install
-```
+git clone https://github.com/antoinelrk/blog-laravel-app.git
+cd ./blog-laravel-app
 
-### Compile and Hot-Reload for Development
+cp .env.example .env
 
-```sh
-npm run dev
-```
+npm i
 
-### Compile and Minify for Production
+npm run build 
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
+npm run preview
 ```
