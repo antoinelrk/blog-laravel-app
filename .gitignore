@@ -29,3 +29,4 @@ coverage
 
 *compose.yml
 package-lock.json
+.env
