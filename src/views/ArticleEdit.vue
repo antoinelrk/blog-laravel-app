@@ -1,21 +1,32 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../stores/articles'
+import { fetchCategories } from '../api/categories.js'
+import { onBeforeMount, ref } from 'vue'
+
 const blog = useBlogStore()
 const route = useRoute()
 const router = useRouter()
 const slug = route.params.slug
 const currentArticle = blog.current(slug)
 
+const categories = ref([])
+
+onBeforeMount(async () => {
+  categories.value = await fetchCategories()
+})
+
 const handleSubmit = async (e) => {
   const formData = new FormData(e.target);
+
   const payload = {
     title: formData.get('title'),
     content_raw: formData.get('content_raw'),
+    category_id: formData.get('category_id'),
     image: formData.get('image')
   }
 
-	const { success } = await blog.update(payload, currentArticle.slug, e.target)
+	const { success } = await blog.update(payload, currentArticle.slug, formData)
 	if (success.state) router.push({name: "home"})
 }
 
@@ -50,6 +61,13 @@ const handleSubmit = async (e) => {
                 />
               </div>
             </div>
+
+            <div class="col-span-full">
+              <select name="category_id" class="data-te-select-init">
+                <option selected>{{ currentArticle.category.name }}</option>
+                <option id="category_id" name="category_id" :key="category.id" v-for="category in categories.data" :value="category.id">{{ category.name }}</option>
+              </select>
+            </div>
   
             <div class="col-span-full">
               <label for="image" class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
@@ -67,6 +85,7 @@ const handleSubmit = async (e) => {
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

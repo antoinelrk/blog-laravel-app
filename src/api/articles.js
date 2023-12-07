@@ -48,27 +48,32 @@ export const create = async (payload) => {
     }
 }
 
-export const update = async (payload, slug, target) => {
+export const update = async (payload, slug) => {
     let data, success = null;
 
-    await axios.post(`${import.meta.env.VITE_API_URL}/articles/${slug}`, target, {
-        method: 'PATCH'
+    await axios.post(`${import.meta.env.VITE_API_URL}/articles/${slug}?_method=PATCH`, payload, {
+        method: 'post',
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
     })
     .then(response => {
         success = {
             state: true,
             statusCode: response.status,
         }
-
-        console.log(`THEN: ${data}`)
-
         data = response.data
     })
-    .catch(err => success = {
-        state: false,
-        statusCode: err.response.status,
-        message: err.message
+    .catch(err => {
+        console.log(err)
+        success = {
+            state: false,
+            statusCode: err.response.status,
+            message: err.message
+        }
     })
+
+    console.log(success)
 
     return {
         data,

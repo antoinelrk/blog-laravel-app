@@ -17,15 +17,11 @@ export const useBlogStore = defineStore('blog', {
             const {data, success} = await create(payload)
             console.log(data, success)
         },
-        async update(payload, slug, target) {
-            const {data, success} = await update(payload, slug, target)
-            console.log(data)
-            if (success.state)
-            {
-                this.posts = this.posts.data.filter((post) => {
-                    if (post.slug === slug) post = data
-                })
-            }
+        async update(payload, slug) {
+            const {data, success} = await update(payload, slug)
+
+            if (success.state) this.posts = this.posts.data.filter((post) => post.slug === slug ? post = data : null)
+            
 
             return { success }
         },

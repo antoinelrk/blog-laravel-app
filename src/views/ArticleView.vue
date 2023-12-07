@@ -1,6 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../stores/articles'
+
 const blog = useBlogStore()
 const route = useRoute()
 const router = useRouter()
@@ -26,14 +27,15 @@ const handleDelete = async () => {
 
 	<div class="p-5 mx-auto sm:p-10 md:p-16 bg-gray-200 text-gray-100">
 		<div class="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
-			<img :src="currentArticle.image" alt="" class="w-full h-60 sm:h-96 bg-gray-800">
+			<img :src="currentArticle.image" alt="" class="w-full h-60 sm:h-96 bg-gray-800 object-fit object-cover">
 			<div class="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-white">
-				<div class="space-y-2">
+				<div class="space-y-2 mb-3">
 					<a rel="noopener noreferrer" href="#" class="inline-block text-2xl text-black font-semibold sm:text-3xl">{{ currentArticle.title }}</a>
 					<p class="text-xs text-black">By
 						<a rel="noopener noreferrer" href="#" class="text-xs text-blue-500 hover:underline">Antoine LRK</a>
 					</p>
 				</div>
+				<span class="whitespace-nowrap rounded-full bg-blue-100 px-2.5 py-0.5 text-sm text-blue-500">{{ currentArticle.category.name }}</span>
 				<div class="text-black">
 					<p v-html="currentArticle.content_raw"></p>
 				</div>
