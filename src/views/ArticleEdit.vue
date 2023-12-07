@@ -1,13 +1,22 @@
 <script setup>
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '../stores/articles'
 const blog = useBlogStore()
 const route = useRoute()
+const router = useRouter()
 const slug = route.params.slug
 const currentArticle = blog.current(slug)
 
-const handleSubmit = (e) => {
-    console.log(e)
+const handleSubmit = async (e) => {
+  const formData = new FormData(e.target);
+  const payload = {
+    title: formData.get('title'),
+    content_raw: formData.get('content_raw'),
+    image: formData.get('image')
+  }
+
+	const { success } = await blog.update(payload, currentArticle.slug, e.target)
+	if (success.state) router.push({name: "home"})
 }
 
 </script>
@@ -47,7 +56,6 @@ const handleSubmit = (e) => {
               <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div class="text-center">
                   <PhotoIcon class="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                  <img :src="currentArticle.image" />
                   <div class="mt-4 flex text-sm leading-6 text-gray-600">
                     <label for="image" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                       <span>Upload a file</span>

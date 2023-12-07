@@ -48,9 +48,27 @@ export const create = async (payload) => {
     }
 }
 
-export const update = async (payload) => {
-    console.log(payload)
-    let data, success;
+export const update = async (payload, slug, target) => {
+    let data, success = null;
+
+    await axios.post(`${import.meta.env.VITE_API_URL}/articles/${slug}`, target, {
+        method: 'PATCH'
+    })
+    .then(response => {
+        success = {
+            state: true,
+            statusCode: response.status,
+        }
+
+        console.log(`THEN: ${data}`)
+
+        data = response.data
+    })
+    .catch(err => success = {
+        state: false,
+        statusCode: err.response.status,
+        message: err.message
+    })
 
     return {
         data,
